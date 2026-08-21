@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vecgra"
+version = "0.1.0"
+description = "Typed Python models and CLI integration for Vecgra"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+authors = [{ name = "Ryan Firth" }]
+keywords = ["graph-database", "vector-database", "pydantic", "jsonl"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Typing :: Typed",
+]
+dependencies = ["pydantic>=2.10,<3"]
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.2",
+    "mypy>=1.14",
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "ruff>=0.9",
+    "twine>=6.0",
+]
+
+[project.scripts]
+vecgra-python = "vecgra.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/r-firth/vecgra-python"
+Documentation = "https://github.com/r-firth/vecgra-python#readme"
+Issues = "https://github.com/r-firth/vecgra-python/issues"
+Repository = "https://github.com/r-firth/vecgra-python"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vecgra"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "RUF", "SIM", "UP"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-config --strict-markers"
+testpaths = ["tests"]
